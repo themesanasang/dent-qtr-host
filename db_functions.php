@@ -25,11 +25,30 @@ class db_functions {
     /**
      * Store Screen
      */
-    public function storeScreen($create_by, $cid, $fullname, $address, $pic_logo, $pic_1, $pic_2, $pic_3, $regdate) {
+    public function storeScreen($create_by, $cid, $fullname, $age, $address, $pic_logo, $pic_1, $pic_2, $pic_3, $regdate) {
         $created_at = date('Y-m-d H:i:s');
         $updated_at = date('Y-m-d H:i:s');
         
-        $result = mysqli_query($this->db->con,"INSERT INTO screen(cid, fullname, address, pic_logo, pic_1, pic_2, pic_3, regdate, create_by, updated_at, created_at) VALUES('$cid', '$fullname', '$address', '$pic_logo', '$pic_1', '$pic_2', '$pic_3', '$regdate', '$create_by', '$updated_at', '$created_at')") or die(mysqli_error($this->db));
+        $result = mysqli_query($this->db->con,"INSERT INTO screen(cid, fullname, age, address, pic_logo, pic_1, pic_2, pic_3, regdate, create_by, updated_at, created_at) VALUES('$cid', '$fullname', '$age', '$address', '$pic_logo', '$pic_1', '$pic_2', '$pic_3', '$regdate', '$create_by', '$updated_at', '$created_at')") or die(mysqli_error($this->db));
+        // check for result
+        if ($result) {
+           return true;
+        } else {
+            return false;
+        }
+    }
+    
+    
+    
+    
+    
+    /**
+     * Update Screen
+     */
+    public function updateScreen($id_edit, $cid, $fullname, $age, $address, $pic_logo, $pic_1, $pic_2, $pic_3) {
+        $updated_at = date('Y-m-d H:i:s');
+        
+        $result = mysqli_query($this->db->con,"UPDATE screen SET cid='$cid', fullname='$fullname', age='$age', address='$address', pic_logo='$pic_logo', pic_1='$pic_1', pic_2='$pic_2', pic_3='$pic_3', updated_at='$updated_at' WHERE id=$id_edit ") or die(mysqli_error($this->db));
         // check for result
         if ($result) {
            return true;

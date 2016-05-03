@@ -7,34 +7,18 @@ require_once 'DB_Functions.php';
 $db = new DB_Functions();
     
 $day = '21-04-2559 10:40:04';
-list($day, $month, $year,$h,$i,$s) = split('[-  :]', $day);  
+//list($day, $month, $year,$h,$i,$s) = split('[-  :]', $day);  
    
-$username = 'g';
-$cid = 6;
-$regdate = (($year) - 543).'-'.$month.'-'.$day.' '.$h.':'.$i.':'.$s;
+list($y, $m, $d ,$h, $i, $s) = multiexplode(array("-"," ",":"), trim($day)); 
 
-$user = $db->getDetailPatient($username, $cid, $regdate);
-echo $user;
-if ($user != false) {
-    
-    $response["orders"] = array();
+echo $y.'-'.$m.'-'.$d;
 
-    while ($row = mysqli_fetch_array($user)) {
-        $response["error"] = FALSE;
-        $response["id"] = $row["id"];
-        $response["cid"] = $row["cid"];
-        $response["fullname"] = $row["fullname"];
-        
-    }
 
-    echo json_encode($response);
-} else {
-    // user not found
-    // echo json with error = 1
-    $response["error"] = TRUE;
-    $response["error_msg"] = "ไม่สามารถแสดงข้อมูลคัดกรองได้!";
-    echo json_encode($response);
+function multiexplode ($delimiters,$string) {
+   
+    $ready = str_replace($delimiters, $delimiters[0], $string);
+    $launch = explode($delimiters[0], $ready);
+    return  $launch;
 }
-
 
 ?>

@@ -30,18 +30,15 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
         $create_by = $_POST['create_by'];
         $cid = $_POST['cid'];
         $fullname = $_POST['fullname'];
+        $age = $_POST['age'];
         $address = $_POST['address'];
         $pic_logo = $_POST['pic_logo'];
         $pic_1 =  $_POST['pic_1'];
         $pic_2 = $_POST['pic_2'];
         $pic_3 = $_POST['pic_3'];
         $regdate = date('Y-m-d H:i:s');
-        
-        /*$response["error"] = FALSE;
-        $response["test"] = $pic_1;
-        echo json_encode($response);*/
              
-        $screen = $db->storeScreen($create_by, $cid, $fullname, $address, $pic_logo, $pic_1, $pic_2, $pic_3, $regdate);
+        $screen = $db->storeScreen($create_by, $cid, $fullname, $age, $address, $pic_logo, $pic_1, $pic_2, $pic_3, $regdate);
         if ($screen) {
             // user stored successfully
             $response["error"] = FALSE;
@@ -53,6 +50,32 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
             echo json_encode($response);
         }                           
     
+    }else if($tag == 'screen-edit'){
+           
+        $id_edit = $_POST['id_edit'];
+        $cid = $_POST['cid'];
+        $fullname = $_POST['fullname'];
+        $age = $_POST['age'];
+        $address = $_POST['address'];
+        $pic_logo = $_POST['pic_logo'];
+        $pic_1 =  $_POST['pic_1'];
+        $pic_2 = $_POST['pic_2'];
+        $pic_3 = $_POST['pic_3'];
+        
+        $screen = $db->updateScreen($id_edit, $cid, $fullname, $age, $address, $pic_logo, $pic_1, $pic_2, $pic_3);
+        if ($screen) {
+            // user stored successfully
+            $response["error"] = FALSE;
+            echo json_encode($response);
+        } else {
+            // user failed to store
+            $response["error"] = TRUE;
+            $response["error_msg"] = "Error occured in Screen";
+            echo json_encode($response);
+        }  
+           
+    }else if($tag == 'screen-delete'){
+        
     } else {
         // user failed to store
         $response["error"] = TRUE;

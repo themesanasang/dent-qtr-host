@@ -71,6 +71,7 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
             $response["id"] = $row["id"];
             $response["cid"] = $row["cid"];
             $response["fullname"] = $row["fullname"];
+            $response["age"] = $row["age"];
             $response["address"] = $row["address"];
             $response["pic_logo"] = $row["pic_logo"];
             $response["pic_1"] = $row["pic_1"];
