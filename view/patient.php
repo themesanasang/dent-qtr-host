@@ -86,6 +86,38 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
             $response["error_msg"] = "ไม่สามารถแสดงข้อมูลคัดกรองได้!";
             echo json_encode($response);
         }
+    } else if( $tag == 'patient-search'){
+        $username = $_POST['username'];
+        $txtsearch = $_POST['txtsearch'];
+
+        $user = $db->getPatientBySearch($username, $txtsearch);
+        if ($user != false) {
+            
+            $response["orders"] = array();
+
+            while ($row = mysqli_fetch_array($user)) {
+                // temp user array
+                $item = array();
+                $item["cid"] = $row["cid"];
+                $item["fullname"] = $row["fullname"];
+                $item["pic_logo"] = (($row["pic_logo"] != "")?$row["pic_logo"]:"nodata");
+                $item["screen_by"] = $row["create_by"];
+                $item["regdate"] = date('d-m', strtotime($row["regdate"])).'-'.((date('Y', strtotime($row["regdate"])))+(543)).' '.date('H:i:s', strtotime($row["regdate"]));
+       
+                // push ordered items into response array
+                array_push($response["orders"], $item);
+           }
+
+            echo json_encode($response);
+            
+        } else {
+            // user not found
+            // echo json with error = 1
+            $response["error"] = TRUE;
+            $response["error_msg"] = "ไม่สามารถแสดงรายการคัดกรองได้!";
+            echo json_encode($response);
+        }
+        
     } else {
         // user failed to store
         $response["error"] = TRUE;

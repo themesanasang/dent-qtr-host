@@ -70,12 +70,24 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
         } else {
             // user failed to store
             $response["error"] = TRUE;
-            $response["error_msg"] = "Error occured in Screen";
+            $response["error_msg"] = "Error occured in Edit Screen";
             echo json_encode($response);
         }  
            
     }else if($tag == 'screen-delete'){
+        $id_edit = $_POST['id_edit'];
+        $screen = $db->deleteScreen($id_edit);
         
+        if ($screen) {
+            // user stored successfully
+            $response["error"] = FALSE;
+            echo json_encode($response);
+        } else {
+            // user failed to store
+            $response["error"] = TRUE;
+            $response["error_msg"] = "Error occured in Delete Screen";
+            echo json_encode($response);
+        }  
     } else {
         // user failed to store
         $response["error"] = TRUE;

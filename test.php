@@ -6,19 +6,15 @@ date_default_timezone_set('Asia/Bangkok');
 require_once 'DB_Functions.php';
 $db = new DB_Functions();
     
-$day = '21-04-2559 10:40:04';
-//list($day, $month, $year,$h,$i,$s) = split('[-  :]', $day);  
-   
-list($y, $m, $d ,$h, $i, $s) = multiexplode(array("-"," ",":"), trim($day)); 
-
-echo $y.'-'.$m.'-'.$d;
 
 
-function multiexplode ($delimiters,$string) {
-   
-    $ready = str_replace($delimiters, $delimiters[0], $string);
-    $launch = explode($delimiters[0], $ready);
-    return  $launch;
-}
+$user = $db->getPatientBySearch('g', 'a');
+
+echo count($user);    
+           
+
+       
+            
+      
 
 ?>
