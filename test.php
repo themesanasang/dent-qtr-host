@@ -8,7 +8,7 @@ $db = new DB_Functions();
     
 
 
-$user = $db->getPatientBySearch('g', 'a');
+$user = $db->getDetailProfile('g');
 
 echo count($user);    
            

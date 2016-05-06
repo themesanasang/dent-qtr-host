@@ -241,6 +241,25 @@ class db_functions {
             return false;
         }
     }
+    
+    
+    
+    
+    
+    
+    /**
+     * Get Profile by username
+     */
+    public function getDetailProfile($username) {
+        $result = mysqli_query($this->db->con,"SELECT * FROM users WHERE username='$username' ") or die(mysqli_connect_errno());
+        // check for result 
+        $no_of_rows = mysqli_num_rows($result);
+        if ($no_of_rows > 0) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
 
 
 
