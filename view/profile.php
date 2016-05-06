@@ -46,6 +46,22 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
         }
     } else if( $tag == 'profile-edit'){
         
+        $username = $_POST['username'];
+        $name = $_POST['name'];
+        $password = $_POST['password'];
+        $address = $_POST['address'];
+        
+        $profile = $db->updateProfile($username, $name, $password, $address);
+        if ($profile) {
+            // user stored successfully
+            $response["error"] = FALSE;
+            echo json_encode($response);
+        } else {
+            // user failed to store
+            $response["error"] = TRUE;
+            $response["error_msg"] = "Error occured in Edit Profile";
+            echo json_encode($response);
+        } 
         
     } else {
         // user failed to store

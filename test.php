@@ -8,9 +8,13 @@ $db = new DB_Functions();
     
 
 
-$user = $db->getDetailProfile('g');
+$user = $db->updateProfile('a1', 'game game', '1', 'nth');
 
-echo count($user);    
+if($user){
+    echo 'ok';
+}else{
+    echo 'no';
+}
            
 
        

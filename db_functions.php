@@ -260,6 +260,32 @@ class db_functions {
             return false;
         }
     }
+    
+    
+    
+    
+     /**
+     * Update Profile
+     */
+    public function updateProfile($username, $name, $password, $address) {
+        
+        if( $password == '' ){
+            $result = mysqli_query($this->db->con,"UPDATE users SET name='$name', address='$address' WHERE username='$username' ") or die(mysqli_error($this->db));
+        }else{
+            $hash = $this->hashSSHA($password);
+            $encrypted_password = $hash["encrypted"]; // encrypted password
+            $salt = $hash["salt"]; // salt
+                    
+            $result = mysqli_query($this->db->con,"UPDATE users SET name='$name', password='$encrypted_password', salt='$salt', address='$address' WHERE username='$username' ") or die(mysqli_error($this->db));
+        }   
+                       
+        // check for result
+        if ($result) {                
+           return true;
+        } else {
+            return false;
+        }
+    }
 
 
 
