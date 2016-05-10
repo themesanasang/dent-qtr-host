@@ -6,7 +6,7 @@ class db_functions {
 
     // constructor
     function __construct() {
-        require_once 'DB_Connect.php';
+        require_once 'db_connect.php';
         // connecting to database
         $this->db = new DB_Connect();
 	    $this->db->connect();
