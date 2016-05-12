@@ -21,6 +21,7 @@ class db_connect
         if (mysqli_connect_errno()) {
             die("Database connection failed");
         }
+        mysqli_set_charset($this->con,"utf8");
         // return database handler
         return $this->con;
     }
