@@ -73,10 +73,17 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
             $response["fullname"] = $row["fullname"];
             $response["age"] = $row["age"];
             $response["address"] = $row["address"];
+            $response["chwpart"] = $row["PROVINCE_NAME"];
+            $response["amppart"] = $row["AMPHUR_NAME"];
+            $response["tmbpart"] = $row["DISTRICT_NAME"];
+            $response["mobile"] = $row["mobile"];
             $response["pic_logo"] = $row["pic_logo"];
             $response["pic_1"] = $row["pic_1"];
             $response["pic_2"] = $row["pic_2"];
             $response["pic_3"] = $row["pic_3"];
+            $response["pic_4"] = $row["pic_4"];
+            $response["pic_5"] = $row["pic_5"];
+            $response["pic_6"] = $row["pic_6"];
                       
             echo json_encode($response);
         } else {

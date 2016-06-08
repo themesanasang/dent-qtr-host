@@ -21,7 +21,7 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
     $db = new DB_Functions();
 
     // response Array
-    $response = array("tag" => $tag, "error" => FALSE);
+    $response = array();
 
     // checking tag
     if ($tag == 'screen') {
@@ -32,23 +32,26 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
         $fullname = $_POST['fullname'];
         $age = $_POST['age'];
         $address = $_POST['address'];
+        $chwpart = $_POST['chw'];
+        $amppart = $_POST['amp'];
+        $tmbpart = $_POST['tmb'];
+        $mobile = $_POST['mobile'];
         $pic_logo = $_POST['pic_logo'];
         $pic_1 =  $_POST['pic_1'];
         $pic_2 = $_POST['pic_2'];
-        $pic_3 = $_POST['pic_3'];
+        $pic_3 = $_POST['pic_3'];       
+        $pic_4 = $_POST['pic_4'];
+        $pic_5 = $_POST['pic_5'];
+        $pic_6 = $_POST['pic_6'];       
         $regdate = date('Y-m-d H:i:s');
              
-        $screen = $db->storeScreen($create_by, $cid, $fullname, $age, $address, $pic_logo, $pic_1, $pic_2, $pic_3, $regdate);
+        $screen = $db->storeScreen($create_by, $cid, $fullname, $age, $address, $chwpart, $amppart, $tmbpart, $mobile, $pic_logo, $pic_1, $pic_2, $pic_3, $pic_4, $pic_5, $pic_6, $regdate);
+        
         if ($screen) {
-            // user stored successfully
-            $response["error"] = FALSE;
-            echo json_encode($response);
+            echo 'success';
         } else {
-            // user failed to store
-            $response["error"] = TRUE;
-            $response["error_msg"] = "Error occured in Screen";
-            echo json_encode($response);
-        }                           
+            echo 'เกิดข้อผิดพลาด! ไม่สามารถบันทึกข้อมูลคัดกรองได้';
+        }       
     
     }else if($tag == 'screen-edit'){
            
@@ -57,37 +60,34 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
         $fullname = $_POST['fullname'];
         $age = $_POST['age'];
         $address = $_POST['address'];
+        $mobile = $_POST['mobile'];
         $pic_logo = $_POST['pic_logo'];
         $pic_1 =  $_POST['pic_1'];
         $pic_2 = $_POST['pic_2'];
         $pic_3 = $_POST['pic_3'];
+        $pic_4 = $_POST['pic_4'];
+        $pic_5 = $_POST['pic_5'];
+        $pic_6 = $_POST['pic_6'];
         
-        $screen = $db->updateScreen($id_edit, $cid, $fullname, $age, $address, $pic_logo, $pic_1, $pic_2, $pic_3);
+        $screen = $db->updateScreen($id_edit, $cid, $fullname, $age, $address, $mobile, $pic_logo, $pic_1, $pic_2, $pic_3, $pic_4, $pic_5, $pic_6);
+        
         if ($screen) {
-            // user stored successfully
-            $response["error"] = FALSE;
-            echo json_encode($response);
+            echo 'success';
         } else {
-            // user failed to store
-            $response["error"] = TRUE;
-            $response["error_msg"] = "Error occured in Edit Screen";
-            echo json_encode($response);
-        }  
+            echo 'เกิดข้อผิดพลาด! ไม่สามารถแก้ไขข้อมูลคัดกรองได้';
+        }     
            
     }else if($tag == 'screen-delete'){
+
         $id_edit = $_POST['id_edit'];
         $screen = $db->deleteScreen($id_edit);
         
         if ($screen) {
-            // user stored successfully
-            $response["error"] = FALSE;
-            echo json_encode($response);
+            echo 'success';
         } else {
-            // user failed to store
-            $response["error"] = TRUE;
-            $response["error_msg"] = "Error occured in Delete Screen";
-            echo json_encode($response);
-        }  
+            echo 'เกิดข้อผิดพลาด! ไม่สามารถลบข้อมูลคัดกรองได้';
+        }   
+
     } else {
         // user failed to store
         $response["error"] = TRUE;
